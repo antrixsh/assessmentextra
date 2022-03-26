@@ -1,0 +1,77 @@
+Q1)
+
+CREATE TABLE temp_employee AS SELECT *FROM Company;
+
+Q2)
+
+CREATE TABLE temp2_employee AS SELECT *FROM Company WHERE 'x'='y';
+
+Q3)
+
+#Last 10 record from student table:
+
+SELECT * FROM ( SELECT * FROM yourTableName ORDER BY id DESC LIMIT 10 )Var1 ORDER BY id ASC;
+
+#max and min salary:
+
+SELECT MAX(Salary), MIN(Salary) 
+FROM Employees;
+
+Q4)
+
+user_transaction template = '''
+select
+user_id
+, count(*) as num transactions
+, sum(amount) as total amount
+from
+ transactions
+where
+ user_id = 1234
+and transaction_date = '2022-03-02'
+group by
+user_id
+
+params = {
+*user id': 1234,
+"transaction date': '2022-03-02'
+}
+
+j=JinjaSq1(param_style='pyformat')
+query,bind_params=j.prepare_query(user_transaction_template, params)
+
+print(query)
+
+
+Q5)
+
+ SELECT * FROM Company WHERE F_NAME LIKE 'P%' AND L_NAME LIKE 'S%';
+
+
+Q6)
+
+SELECT LAST (Student_Name) AS Last_Student FROM Student_Details;  
+
+Q7)
+
+WITH sales AS (
+    SELECT 
+        staff_id, 
+        COUNT(*) order_count  
+    FROM
+        sales.orders
+    WHERE 
+        YEAR(order_date) = 2022
+    GROUP BY
+        staff_id
+
+)
+SELECT
+    AVG(order_count) avg_orders_by_staff
+FROM 
+    sales;
+
+Q8)
+
+UPDATE macD_staff SET L_name = 'Amogh' WHERE ID=10
+DELETE FROM macD_staff WHERE ID ='1'
