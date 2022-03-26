@@ -1,0 +1,68 @@
+1.#creating table with same structure with data
+Create table Student_Replica as Select * from Student;
+
+2.#creating table with same structure without data
+Create table Student_Replica as Select * from Student where 1=2;
+
+3.#displaying Last 10 records from Student table
+Select * from Student S where rownum <=10
+
+union
+
+select * from (Select * from Student S order by rowid desc) where rownum <=10;
+#fetching maximum salary of Employee and minimum salary of Employee together from Employee table
+Select max (salary) from Employee
+
+Union
+
+Select min (salary) from Employee;
+
+4.#Creating a SQL Table and Reading it’s record by using Template
+user_transaction template = '''
+select
+user_id
+, count(*) as num transactions
+, sum(amount) as total amount
+from
+ transactions
+where
+ user_id = 1234
+and transaction_date = '2022-03-02'
+group by
+user_id
+
+params = {
+*user id': 1234,
+"transaction date': '2022-03-02'
+}
+
+j=JinjaSq1(param_style='pyformat')
+query,bind_params=j.prepare_query(user_transaction_template, params)
+
+print(query)
+
+5.#Listing  the Students whose name starts with P and surname starts with S
+Select * from Students where name like ‘P%’ and surname like ‘S%’;
+
+6.#fetching last record from Student table
+Select * from Student where rowid = select max(rowid) from Student;
+
+7.WITH sales AS (
+    SELECT 
+        staff_id, 
+        COUNT(*) order_count  
+    FROM
+        sales.orders
+    WHERE 
+        YEAR(order_date) = 2022
+    GROUP BY
+        staff_id
+
+)
+SELECT
+    AVG(order_count) avg_orders_by_staff
+FROM 
+    sales;
+8.
+UPDATE macD_staff SET L_name = 'Kumar' WHERE ID=10
+DELETE FROM macD_staff WHERE ID ='1'
